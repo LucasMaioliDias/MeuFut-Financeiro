@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Requests\StoreUserRequest;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/cadastrar', [UserController::class, 'create'])->name('get.register');
+Route::post('/cadastrar', [UserController::class, 'store'])->name('post.register');
