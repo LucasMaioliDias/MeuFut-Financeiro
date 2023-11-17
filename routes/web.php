@@ -22,3 +22,5 @@ Route::get('/', function () {
 
 Route::get('/cadastrar', [UserController::class, 'create'])->name('get.register');
 Route::post('/cadastrar', [UserController::class, 'store'])->name('post.register');
+
+Route::get('/login',function(){})->name('login');
