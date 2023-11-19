@@ -131,7 +131,7 @@
                 <div class="alert">{{ $message }}</div>
                 @enderror
                 <button>Criar</button>
-                <p class="message">Já tem cadastro? <a href="/login">Entrar</a></p>
+                <p class="message">Já tem cadastro? <a href="{{ route('login') }}">Entrar</a></p>
             </form>
         </div>
     </div>

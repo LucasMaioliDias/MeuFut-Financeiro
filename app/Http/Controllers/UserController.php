@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\User;
+use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -25,7 +29,17 @@ class UserController extends Controller
         $user = user::create([
             'name' => $userData['name'],
             'email' => $userData['email'],
-            'password' => $userData['password']
+            'password' => Hash::make($userData['password']),
         ]);
+
+        $user->save();
+
+        return redirect('/home');
     }
+     /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
 }

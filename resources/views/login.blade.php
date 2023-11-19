@@ -112,7 +112,8 @@
             <div class="titulo">
                 <h1 class="">Entrar</h1>
             </div>
-            <form class="Login-form" method="POST" >
+            <form class="Login-form" method="POST" action="{{ route('authenticate') }}" >
+                @csrf
                 <input type="email" id="email" name="email" placeholder="Email" required class="@error('email') is-invalid @enderror">
                 @error('email')
                 <div class="alert">{{ $message }}</div>
@@ -121,8 +122,8 @@
                 @error('password')
                 <div class="alert">{{ $message }}</div>
                 @enderror
-                <button>Entrar</button>
-                <p class="message">Não tem cadastro? <a href="/cadastrar">Entrar</a></p>
+                <button type="submit">Entrar</button>
+                <p class="message">Cadastrar-se <a href="{{route('get.register')}}">Entrar</a></p>
             </form>
         </div>
     </div>

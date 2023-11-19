@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Requests\StoreUserRequest;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController; 
 
 
 /*
@@ -23,4 +24,6 @@ Route::get('/', function () {
 Route::get('/cadastrar', [UserController::class, 'create'])->name('get.register');
 Route::post('/cadastrar', [UserController::class, 'store'])->name('post.register');
 
-Route::get('/login',function(){})->name('login');
+Route::get('/login',[LoginController::class,'index'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
+Route::get('/home',function(){echo 'home';})->name('home');
