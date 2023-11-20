@@ -3,7 +3,8 @@
 use App\Http\Controllers\UserController;
 use App\Http\Requests\StoreUserRequest;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController; 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MenuController;  
 
 
 /*
@@ -26,4 +27,5 @@ Route::post('/cadastrar', [UserController::class, 'store'])->name('post.register
 
 Route::get('/login',[LoginController::class,'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
-Route::get('/home',function(){echo 'home';})->name('home');
+Route::get('/menu',[MenuController::class,'index'])->name('menu');
+Route::post('/finance', [MenuController::class, 'finance'])->name('finance');

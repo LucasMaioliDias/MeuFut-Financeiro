@@ -34,7 +34,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect('/home');
+        return redirect('/menu');
     }
      /**
      * Display the specified resource.
