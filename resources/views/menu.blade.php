@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +21,7 @@
 
         .header h1,
         .header a {
-            margin: 0;   
+            margin: 0;
         }
 
         .borda {
@@ -42,10 +43,10 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            
+
             border: 2px solid #888;
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-            padding: 20px 30px; 
+            padding: 20px 30px;
         }
 
         .verde {
@@ -62,10 +63,12 @@
 
         .preto {
             border-color: #000;
-            background-color: ##00000080;
+            background-color: #00000080;
             color: #000;
         }
-        .quadrado p, .quadrado h2 {
+
+        .quadrado p,
+        .quadrado h2 {
             margin: 0;
         }
 
@@ -77,32 +80,49 @@
             padding: 20px;
             justify-content: center;
         }
+
         .container2 input {
             margin-right: 8px;
-            padding:  0 20px;
+            padding: 0 20px;
         }
-        
-        .container2 button {
-                font-family: "Roboto", sans-serif;
-                text-transform: uppercase;
-                outline: 0;
-                background: #87CEEB;
-                border: 0;
-                padding: 15px;
-                color: #FFFFFF;
-                font-size: 14px;
-                cursor: pointer;
-                border-radius: 7px;
-            }
 
-            .container2 button:hover,
-            .container2 button:active,
-            .container2 button:focus {
-                background: #4800f1;
-            }
+        .container2 button {
+            font-family: "Roboto", sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: #87CEEB;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 7px;
+        }
+
+        .container2 button:hover,
+        .container2 button:active,
+        .container2 button:focus {
+            background: #4800f1;
+        }
+
+        .container3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container4{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
         
     </style>
 </head>
+
 <body>
     <div class="header">
         <div class="borda">
@@ -115,24 +135,34 @@
     <div class='container'>
         <div class='quadrado verde'>
             <p>Lucro</p>
-            <h2>R$ {{ number_format(Session::get('lucro', 0), 2, ',', '.') }}</h2>
+            <h2>R$ 0,00</h2>
         </div>
         <div class='quadrado vermelho'>
-    <p>Gastos</p>
-    <h2>R$ {{ number_format(Session::get('despesas', 0), 2, ',', '.') }}</h2>
-</div>
+            <p>Gastos</p>
+            <h2>R$ 0,00</h2>
+        </div>
         <div class='quadrado preto'>
-    <p>Saldo</p>
-    <h2>R$ {{ number_format(Session::get('saldo', 0), 2, ',', '.') }}</h2>
-</div>
+            <p>Saldo</p>
+            <h2>R$ 0,00</h2>
+        </div>
     </div>
     <div class="container2">
-    <form action="{{ route('finance') }}" method="POST">
-        @csrf
-        <input type="text" placeholder="Ex. Energia" id="tipo" name="tipo">
-        <input type="number" placeholder="Valor" id="valor" name="valor">
-        <button type="submit" name="registrar">Registrar</button>
-    </form>
-</div>
+        <form action="{{ route('store') }}" method="POST">
+            @csrf
+            <input type="text" placeholder="Ex. Energia" id="tipo" name="tipo">
+            <input type="number" placeholder="Valor" id="valor" name="valor">
+            <button type="submit" name="registrar">Registrar</button>
+        </form>
+    </div>
+    <div class="container3">
+    @foreach($finances as $finance)
+    <div class="">
+        <h2>{{ $finance->tipo }}</h2>
+        <p>{{ $finance->valor }}</p>
+        <p>{{ \Carbon\Carbon::parse($finance->updated_at)->format('d/m/Y H:i:s') }}</p>
+    </div>
+@endforeach
+    </div>
 </body>
+
 </html>
