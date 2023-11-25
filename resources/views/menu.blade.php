@@ -135,30 +135,31 @@
     <div class='container'>
         <div class='quadrado verde'>
             <p>Lucro</p>
-            <h2>R$ 0,00</h2>
+            <h2>R$ {{$positive}}</h2>
         </div>
         <div class='quadrado vermelho'>
             <p>Gastos</p>
-            <h2>R$ 0,00</h2>
+            <h2>R$ {{$negative}}</h2>
         </div>
         <div class='quadrado preto'>
             <p>Saldo</p>
-            <h2>R$ 0,00</h2>
+            <h2>R$ {{$saldo}}</h2>
         </div>
     </div>
     <div class="container2">
         <form action="{{ route('store') }}" method="POST">
             @csrf
-            <input type="text" placeholder="Ex. Energia" id="tipo" name="tipo">
-            <input type="number" placeholder="Valor" id="valor" name="valor">
+            <input type="text" placeholder="Ex. Energia" id="description" name="description">
+            <input type="number" placeholder="Valor" id="value" name="value">
+            <input type="number" placeholder="Valor" id="type" name="type">
             <button type="submit" name="registrar">Registrar</button>
         </form>
     </div>
     <div class="container3">
     @foreach($finances as $finance)
     <div class="">
-        <h2>{{ $finance->tipo }}</h2>
-        <p>{{ $finance->valor }}</p>
+        <h2>{{ $finance->description }}</h2>
+        <p>{{ $finance->value }}</p>
         <p>{{ \Carbon\Carbon::parse($finance->updated_at)->format('d/m/Y H:i:s') }}</p>
     </div>
 @endforeach

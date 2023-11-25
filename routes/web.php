@@ -24,7 +24,6 @@ Route::get('/', function () {
 
 Route::get('/cadastrar', [UserController::class, 'create'])->name('get.register');
 Route::post('/cadastrar', [UserController::class, 'store'])->name('post.register');
-
 Route::get('/login',[LoginController::class,'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
 Route::get('/menu',[MenuController::class,'index'])->name('menu');

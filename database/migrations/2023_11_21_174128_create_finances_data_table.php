@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('finances_data', function (Blueprint $table) {
-            $table->id();
-            $table->string('tipo');
-            $table->decimal('valor', 10, 2);
+            $table->id(); 
+            $table->string('description');
+            $table->decimal('value', 10, 2);
+            $table->boolean('type');
             $table->timestamps();
         });
     }

@@ -11,11 +11,14 @@ class MenuController extends Controller
 {
     public function index()
     {
-        //$userId = Auth::id();
-        // $Menu = Menu::where('user_is',$userId)->ordeByDesc('created_at')->get();
-       // return view('menu'); //->with('Menu', $Menu);
+        
+        
         $finances = Finance::all(); 
-        return view('menu', ['finances' => $finances]);
+        $positive = Finance::where('type', 1)->sum('value');
+        $negative = Finance::where('type', 2)->sum('value');
+        $saldo = $positive - $negative;
+
+        return view('menu', ['finances' => $finances, 'positive' => $positive, 'negative' => $negative, 'saldo' => $saldo]);
     }
 
 
@@ -23,13 +26,15 @@ class MenuController extends Controller
     public function store(Request $request)
     {
         $FinanceData = $request->validate([
-            'tipo' => 'required',
-            'valor' => 'required|numeric',
+            'type' => 'required',
+            'description' => 'required',
+            'value' => 'required|numeric',
         ]);
 
         $finance = Finance::create([
-            'tipo' => $FinanceData['tipo'],
-            'valor' => $FinanceData['valor'],
+            'description' => $FinanceData['description'],
+            'type' => $FinanceData['type'],
+            'value' => $FinanceData['value'],
 
         ]);
 

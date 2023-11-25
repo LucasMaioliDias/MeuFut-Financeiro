@@ -9,5 +9,5 @@ class Finance extends Model
 {
     use HasFactory;
     protected $table = 'finances_data';
-    protected $fillable = ['tipo', 'valor'];
+    protected $fillable = ['type', 'value','description'];
 }
