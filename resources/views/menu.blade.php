@@ -129,7 +129,7 @@
             <h1>Financeiro Pessoal</h1>
         </div>
         <div class="borda">
-            <a href="#">Sair</a>
+            <a href="{{ route('logout') }}">Sair</a>
         </div>
     </div>
     <div class='container'>
