@@ -11,9 +11,9 @@ class MenuController extends Controller
 {
     public function index()
     {
-        
-        
-        $finances = Finance::all(); 
+
+
+        $finances = Finance::all();
         $positive = Finance::where('type', 1)->sum('value');
         $negative = Finance::where('type', 2)->sum('value');
         $saldo = $positive - $negative;
@@ -40,12 +40,27 @@ class MenuController extends Controller
 
         $finance->save();
 
-         return redirect('/menu');
+        return redirect('/menu');
     }
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Finance  $finance
+     * @return \Illuminate\Http\Response
+     */
+
+
+    public function destroy(int $financeId)
+    {
+        Finance::destroy($financeId);
+
+        return redirect('menu');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\finance  $financeId
      * @return \Illuminate\Http\Response
      */
 }
