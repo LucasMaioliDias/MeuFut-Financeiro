@@ -17,6 +17,8 @@ return new class extends Migration
             $table->decimal('value', 10, 2);
             $table->boolean('type');
             $table->timestamps();
+            $table->foreignId('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

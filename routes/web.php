@@ -30,7 +30,7 @@ Route::post('/login', [LoginController::class, 'authenticate'])->name('authentic
 Route::middleware('auth')->group(function () {
     Route::get('/menu', [MenuController::class, 'index'])->name('menu');
     Route::delete('/finance/{financeId}', [MenuController::class, 'destroy'])->name('finance.destroy');
-});
+}); 
 
 Route::post('/finance', [MenuController::class, 'store'])->name('store');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

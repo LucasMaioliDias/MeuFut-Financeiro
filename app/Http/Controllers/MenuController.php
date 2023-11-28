@@ -11,11 +11,12 @@ class MenuController extends Controller
 {
     public function index()
     {
+       
+        $userId = auth()->id();
 
-
-        $finances = Finance::all();
-        $positive = Finance::where('type', 1)->sum('value');
-        $negative = Finance::where('type', 2)->sum('value');
+        $finances = Finance::where('user_id', $userId)->get();
+        $positive = Finance::where('user_id', $userId)->where('type', 1)->sum('value');
+        $negative = Finance::where('user_id', $userId)->where('type', 2)->sum('value');
         $saldo = $positive - $negative;
 
         return view('menu', ['finances' => $finances, 'positive' => $positive, 'negative' => $negative, 'saldo' => $saldo]);
@@ -35,7 +36,7 @@ class MenuController extends Controller
             'description' => $FinanceData['description'],
             'type' => $FinanceData['type'],
             'value' => $FinanceData['value'],
-
+            'user_id' => auth()->id(),
         ]);
 
         $finance->save();
